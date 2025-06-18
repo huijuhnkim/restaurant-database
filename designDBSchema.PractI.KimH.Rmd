@@ -1,0 +1,31 @@
+---
+title: "Part B / Design Normalized Database"
+author: "Hui Juhn Kim"
+output: html_document
+---
+
+VisitID	
+Restaurant
+ServerEmpID	
+ServerName	
+StartDateHired	
+EndDateHired	
+HourlyRate	
+ServerBirthDate	
+ServerTIN	
+VisitDate
+VisitTime
+MealType
+PartySize
+Genders
+WaitTime
+CustomerName
+CustomerPhone
+CustomerEmail
+LoyaltyMember
+FoodBill
+TipAmount
+DiscountApplied
+PaymentMethod
+orderedAlcohol
+AlcoholBill
