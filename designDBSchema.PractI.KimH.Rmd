@@ -45,5 +45,4 @@ Genders $\rightarrow$ PartySize
 
 ## ERD of Normalized Relations
 ** Todo: replace image with the one in AWS server **
-
 ![Restaurant Visits ERD with IE Notation](practicum1.ERD.png){width=50%}
