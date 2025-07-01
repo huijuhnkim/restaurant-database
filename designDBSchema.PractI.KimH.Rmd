@@ -26,14 +26,18 @@ output: html_document
 ---
 
 ## Decomposed Relations
+
 ### Servers
-ServerEmpID $\rightarrow$ { ServerName, StartDateHired, ServerBirthDate, ServerTIN }
+ServerEmpID $\rightarrow$ { ServerName, ServerBirthDate, ServerTIN }
+
+### Employment 
+EmploymentID $\rightarrow$ {Restaurant, ServerEmpID, StartDateHired, EndDateHired, HourlyRate}
 
 ### Visits
 VisitID $\rightarrow$ { Restaurant, VisitDate, VisitTime, MealType, Genders, WaitTime, ServerEmpID, CustomerPhoneNumber, OrderedAlcohol, BillID}
 
 ### Bills
-BillID $\rightarrow$ { FoodBill, AlcoholBill, TipAmount, DiscountApplied, PaymentMethod }
+VisitID $\rightarrow$ { FoodBill, AlcoholBill, TipAmount, DiscountApplied, PaymentMethod }
 
 ### Customers
 CustomerPhoneNumber $\rightarrow$ { CustomerName, CustomerPhoneNumber, CustomerEmail, LoyaltyMember }

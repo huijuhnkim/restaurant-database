@@ -20,10 +20,12 @@ dbConnection <- dbConnect(RSQLite::SQLite(), fileName)
 # drop all tables in db
 tableList <- dbListTables(dbConnection)
 for (table in tableList) {
-  dropTableStatement = paste0("DROP TABLE ", table)
-  dbExecute(dbConnection, dropTableStatement)
+  if (table != "sqlite_sequence") {
+    dropTableStatement = paste0("DROP TABLE ", table)
+    dbExecute(dbConnection, dropTableStatement)  
+  }
 }
 
-#
+# disconnect from database
 dbDisconnect(dbConnection)
 
