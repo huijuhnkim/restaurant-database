@@ -22,7 +22,6 @@ dbFilename <- "visits.db"
 dbConnection <- dbConnect(RSQLite::SQLite(), dbFilename)
 
 
-
 # populate 'parties' table with filtered data frame
 gendersTableData <- df.orig[,13:14]
 names(gendersTableData) <- c("party_size", "genders")
@@ -30,7 +29,6 @@ gendersTableData <- unique(gendersTableData)
 if (nrow(dbGetQuery(dbConnection, "SELECT * FROM parties")) == 0) {
   dbWriteTable(dbConnection, "parties", gendersTableData, overwrite=F, append=T)  
 }
-
 
 
 # populate 'bills' table with filtered data frame
@@ -44,21 +42,32 @@ if (nrow(dbGetQuery(dbConnection, "SELECT * FROM bills")) == 0) {
 
 
 # populate 'servers' table with filtered data frame
-serversTableData <- df.orig[, c(3:9)]
+serversTableData <- df.orig[, c(3, 4, 8, 9)]
 serversTableData <- serversTableData[serversTableData$ServerEmpID != "NA",]
 serversTableData <- na.omit(serversTableData)
 serversTableData <- unique(serversTableData)
-names(serversTableData) <- c("server_emp_id", "server_name", "hired_start_date",
-                             "hired_end_date", "hourly_rate", "server_dob", 
+names(serversTableData) <- c("server_emp_id", "server_name", "server_dob", 
                              "server_tin")
-
-# debug
-
 if(nrow(dbGetQuery(dbConnection, "SELECT * FROM servers")) == 0) {
   dbWriteTable(dbConnection, "servers", serversTableData, overwrite=F, append=T)
 }
 
+
+# populate 'restaurants' table
+restaurantsTableData <- unique(df.orig[, 2])
+print(restaurantsTableData)
+if (nrow(dbGetQuery(dbConnection, "SELECT * FROM restaurants")) == 0) {
+  for (restaurant in restaurantsTableData) {
+    dbExecute(dbConnection, sprintf("INSERT INTO restaurant (name) VALUES (%s)", 
+                                    restaurant))
+  }
+}
+
+# populate 'employments' table
+
+
 # populate 'customers' table with filtered data frame
+
 
 # populate 'visits' table
 
