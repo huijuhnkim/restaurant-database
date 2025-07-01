@@ -13,9 +13,11 @@ for (pkg in packageVector) {
 library("DBI")
 library("RSQLite")
 
+
 # connect to database
 filename <- "visits.db"
 dbConnection <- dbConnect(RSQLite::SQLite(), filename)
+
 
 # Create restaurants table
 createRestaurantsTableStatement <- "
@@ -25,13 +27,6 @@ CREATE TABLE IF NOT EXISTS restaurants (
 );"
 dbExecute(dbConnection, createRestaurantsTableStatement)
 
-# Create meal types table
-createMealTypesTableStatement <- "
-CREATE TABLE IF NOT EXISTS meal_types (
-  meal_types_id INTEGER PRIMARY KEY,
-  type TEXT NOT NULL
-);"
-dbExecute(dbConnection, createMealTypesTableStatement)
 
 # Create servers table
 createServersTableStatement <- "
@@ -42,6 +37,7 @@ CREATE TABLE IF NOT EXISTS servers (
   server_tin TEXT
 );"
 dbExecute(dbConnection, createServersTableStatement)
+
 
 # Create employment table
 createEmploymentTableStatement <- "
@@ -58,6 +54,7 @@ CREATE TABLE IF NOT EXISTS employment (
 "
 dbExecute(dbConnection, createEmploymentTableStatement)
 
+
 # Create customers table
 createCustomersTableStatement <- "
 CREATE TABLE IF NOT EXISTS customers (
@@ -68,6 +65,7 @@ CREATE TABLE IF NOT EXISTS customers (
 );
 "
 dbExecute(dbConnection, createCustomersTableStatement)
+
 
 # Create parties table
 createPartiesTableStatement <- "
@@ -98,7 +96,7 @@ CREATE TABLE IF NOT EXISTS visits (
   restaurant_id INTEGER NOT NULL,
   visit_date DATE,
   visit_time TIME,
-  meal_type INTEGER,
+  meal_type TEXT,
   genders TEXT,
   wait_time INTEGER,
   server_emp_id INTEGER,
@@ -106,7 +104,6 @@ CREATE TABLE IF NOT EXISTS visits (
   bill_id INTEGER NOT NULL,
   ordered_alcohol INTEGER CHECK (ordered_alcohol IN (0, 1)),
   FOREIGN KEY (restaurant_id) REFERENCES restaurants(restaurant_id),
-  FOREIGN KEY (meal_type) REFERENCES meal_types(meal_types_id),
   FOREIGN KEY (genders) REFERENCES parties(genders),
   FOREIGN KEY (server_emp_id) REFERENCES servers(server_emp_id),
   FOREIGN KEY (customer_phone_number) REFERENCES customers(phone_number),
