@@ -1,3 +1,7 @@
+#' PART C: REALIZE DATABASE
+#' Name: Hui Juhn Kim
+#' Current Semester: 2025SU
+
 # install and import required libraries
 # TODO: replace with MySQL 
 packageVector <- c("RSQLite", "DBI")

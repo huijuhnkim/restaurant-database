@@ -1,4 +1,4 @@
-#' DELETE DATABASE
+#' PART D: DELETE DATABASE
 #' Name: Hui Juhn Kim
 #' Current Semester: 2025SU
 
